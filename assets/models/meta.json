@@ -1,5 +1,5 @@
 {
-  "saved_at": "2025-10-23T22:06:21.324837Z",
+  "saved_at": "2025-10-23T23:04:57.888337Z",
   "languages": [
     "en",
     "de"
@@ -42,7 +42,7 @@
       },
       "ROOM": {
         "type": "str",
-        "free_text": true,
+        "free_text": false,
         "options": [
           "bedroom",
           "kitchen",
@@ -55,7 +55,8 @@
     },
     "set_temperature": {
       "VALUE": {
-        "type": "int"
+        "type": "int",
+        "free_text": true
       },
       "ROOM": {
         "type": "str",
@@ -159,16 +160,17 @@
         "(?i)\\b\\s+turn\\s+off(?P<NAME>.+?)(?=\\s+'s\\s+lamp\\s+in\\s+the)\\s+'s\\s+lamp\\s+in\\s+the(?P<ROOM>(?:bedroom|kitchen|living\\s+room|bathroom|office|garage))\\b"
       ],
       "set_temperature": [
-        "(?i)\\b\\s+set\\s+the\\s+thermostat\\s+to(?P<VALUE>\\S+(?:\\s+\\S+){0,3})\\s+degrees\\b",
-        "(?i)\\b\\s+adjust\\s+temperature\\s+to(?P<VALUE>\\S+(?:\\s+\\S+){0,3})\\b",
-        "(?i)\\b\\s+make\\s+it(?P<VALUE>\\S+(?:\\s+\\S+){0,3})\\s+degrees\\s+in\\s+the(?P<ROOM>.+)$\\b",
-        "(?i)\\b\\s+mach\\s+es(?P<VALUE>\\S+(?:\\s+\\S+){0,3})\\s+Grad\\s+warm\\b"
+        "(?i)\\b\\s+set\\s+the\\s+thermostat\\s+to(?P<VALUE>.+?)(?=\\s+degrees)\\s+degrees\\b",
+        "(?i)\\b\\s+adjust\\s+temperature\\s+to(?P<VALUE>.+)$\\b",
+        "(?i)\\b\\s+make\\s+it(?P<VALUE>.+?)(?=\\s+degrees\\s+in\\s+the)\\s+degrees\\s+in\\s+the(?P<ROOM>.+)$\\b",
+        "(?i)\\b\\s+mach\\s+es(?P<VALUE>.+?)(?=\\s+Grad\\s+warm)\\s+Grad\\s+warm\\b"
       ],
       "play_music": [
         "(?i)\\b\\s+play\\s+some\\s+music\\b",
         "(?i)\\b\\s+play(?P<GENRE>.+?)(?=\\s+music)\\s+music\\b",
         "(?i)\\b\\s+play(?P<SONG>.+)$\\b",
-        "(?i)\\b\\s+play(?P<SONG>.+?)(?=\\s+by)\\s+by(?P<ARTIST>.+)$\\b"
+        "(?i)\\b\\s+play(?P<SONG>.+?)(?=\\s+by)\\s+by(?P<ARTIST>.+)$\\b",
+        "(?i)\\b\\s+spiele\\s+das\\s+Lied(?P<SONG>.+)$\\b"
       ],
       "stop_music": [
         "(?i)\\b\\s+stop\\s+the\\s+music\\b",
@@ -246,13 +248,12 @@
         "(?i)\\b\\s+schalte(?P<NAME>.+?)(?=\\s+Lampe\\s+im)\\s+Lampe\\s+im(?P<ROOM>(?:bedroom|kitchen|living\\s+room|bathroom|office|garage))\\s+aus\\b"
       ],
       "set_temperature": [
-        "(?i)\\b\\s+stelle\\s+die\\s+Temperatur\\s+auf(?P<VALUE>\\S+(?:\\s+\\S+){0,3})\\s+Grad\\b",
-        "(?i)\\b\\s+Temperatur\\s+im(?P<ROOM>.+?)(?=\\s+auf)\\s+auf(?P<VALUE>\\S+(?:\\s+\\S+){0,3})\\s+Grad\\s+einstellen\\b"
+        "(?i)\\b\\s+stelle\\s+die\\s+Temperatur\\s+auf(?P<VALUE>.+?)(?=\\s+Grad)\\s+Grad\\b",
+        "(?i)\\b\\s+Temperatur\\s+im(?P<ROOM>.+?)(?=\\s+auf)\\s+auf(?P<VALUE>.+?)(?=\\s+Grad\\s+einstellen)\\s+Grad\\s+einstellen\\b"
       ],
       "play_music": [
         "(?i)\\b\\s+spiele\\s+Musik\\b",
         "(?i)\\b\\s+spiele(?P<GENRE>.+?)(?=\\s+Musik)\\s+Musik\\b",
-        "(?i)\\b\\s+spiele\\s+das\\s+Lied(?P<SONG>.+)$\\b",
         "(?i)\\b\\s+spiele(?P<SONG>.+?)(?=\\s+von)\\s+von(?P<ARTIST>.+)$\\b"
       ],
       "stop_music": [
@@ -295,43 +296,43 @@
   },
   "trained_meta": {
     "en": {
-      "n_examples": 62,
+      "n_examples": 63,
       "classes": [
-        "turn_off_lights",
-        "add_to_shopping_list",
-        "check_news",
-        "set_alarm",
-        "get_weather_now",
-        "check_time",
-        "play_music",
-        "open_curtains",
-        "get_weather_tomorrow",
         "control_tv",
-        "control_door",
+        "open_curtains",
+        "close_curtains",
         "turn_on_lights",
         "stop_music",
-        "close_curtains",
-        "set_temperature"
+        "check_news",
+        "get_weather_now",
+        "set_temperature",
+        "set_alarm",
+        "check_time",
+        "add_to_shopping_list",
+        "control_door",
+        "play_music",
+        "turn_off_lights",
+        "get_weather_tomorrow"
       ]
     },
     "de": {
-      "n_examples": 44,
+      "n_examples": 43,
       "classes": [
-        "turn_off_lights",
-        "add_to_shopping_list",
-        "check_news",
-        "set_alarm",
-        "get_weather_now",
-        "check_time",
-        "play_music",
-        "open_curtains",
-        "get_weather_tomorrow",
         "control_tv",
-        "control_door",
+        "open_curtains",
+        "close_curtains",
         "turn_on_lights",
         "stop_music",
-        "close_curtains",
-        "set_temperature"
+        "check_news",
+        "get_weather_now",
+        "set_temperature",
+        "set_alarm",
+        "check_time",
+        "add_to_shopping_list",
+        "control_door",
+        "play_music",
+        "turn_off_lights",
+        "get_weather_tomorrow"
       ]
     }
   }

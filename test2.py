@@ -1,9 +1,7 @@
 from pynlu import PyNLU
 
 pyn = PyNLU("./assets/models")
-print("ww")
-intent , confidence, lang = pyn.process("Wie wird das Wtter heute in Schweich")
-print(intent, confidence, lang)
 
-slots = pyn.slots("Wie wird das Wtter heute in Schweich", intent, lang)
-print(slots)
+intent, confidence, lang, slots = pyn.predict("Turn on the light in the living room please")
+
+print(intent, confidence, lang, slots)

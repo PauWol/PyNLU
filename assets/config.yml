@@ -82,7 +82,7 @@ intents:
         free_text: true
       ROOM:
         type: str
-        free_text: true
+        free_text: false
         options:
           ["bedroom", "kitchen", "living room", "bathroom", "office", "garage"]
 
@@ -97,6 +97,7 @@ intents:
     slots:
       VALUE:
         type: int
+        free_text: true
       ROOM:
         type: str
         free_text: true
