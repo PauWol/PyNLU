@@ -1,3 +1,0 @@
-_label_weather_in Wie ist das Wetter in London?
-_label_who_am_i Wer bist du?
-_label_who_am_i Was bist du?
