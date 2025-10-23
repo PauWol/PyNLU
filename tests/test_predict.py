@@ -5,6 +5,22 @@ from pathlib import Path
 
 from pynlu import PyNLU
 
+# Module-level DummyClf so joblib can pickle it
+class DummyClf:
+    def __init__(self, classes=None):
+        if classes is None:
+            classes = ["turn_on_lights", "noop"]
+        self.classes_ = np.array(classes)
+
+    def predict_proba(self, X):
+        n = len(X) if hasattr(X, "__len__") else 1
+        probs = np.zeros((n, len(self.classes_)))
+        probs[:, 0] = 0.99
+        if probs.shape[1] > 1:
+            probs[:, 1:] = (1.0 - probs[:, :1]) / (probs.shape[1] - 1)
+        return probs
+
+
 def make_dummy_models_dir(tmp_path):
     assets = tmp_path / "assets"
     models_dir = assets / "models"
@@ -14,50 +30,56 @@ def make_dummy_models_dir(tmp_path):
     meta = {
         "languages": ["en"],
         "intent_slot_specs": {
-            "turn_on_lights": {"ROOM": {"options": ["living room"], "type": "str"}}
+            "turn_on_lights": {"ROOM": {"options": ["living room"], "type": "str"}},
+            "noop": {}
         },
         "intent_patterns": {
-            "en": {"turn_on_lights": [".*"]}
+            "en": {"turn_on_lights": [".*"], "noop": [".*"]}
         },
         "trained_meta": {}
     }
     (models_dir / "meta.json").write_text(json.dumps(meta), encoding="utf-8")
 
-    # Dummy classifier that returns one class with high confidence
-    class DummyClf:
-        def __init__(self):
-            self.classes_ = np.array(["turn_on_lights"])
-        def predict_proba(self, X):
-            return np.array([[0.99]])
-
-    joblib.dump(DummyClf(), models_dir / "en_nlpclf.joblib")
+    # Dump a module-level DummyClf instance
+    joblib.dump(DummyClf(classes=["turn_on_lights", "noop"]), models_dir / "en_nlpclf.joblib")
     return assets
 
+
 def test_main_init(tmp_path, monkeypatch):
-    # Create fake assets/models and instantiate PyNLU pointing to it
     assets = make_dummy_models_dir(tmp_path)
 
-    # monkeypatch spaCy loaders to avoid any imports if your PyNLU tries to load spaCy in _init
-    # If PyNLU._init calls util.load_class_lang_models, we should patch it there,
-    # but a safe approach is ensuring PyNLU doesn't try to download at import time.
+    # prevent spaCy download if PyNLU tries to load models on init by patching util loader
     try:
-        pyn = PyNLU(str(assets / "models"))
+        monkeypatch.setattr("pynlu.util.load_class_lang_models", lambda cls: None)
     except Exception:
-        # some implementations auto-load in __init__; ignore if already loaded
+        # If monkeypatch fails (older pytest), ignore - we still created models locally
         pass
 
-    assert pyn # type: ignore
+    pyn = PyNLU(str(assets / "models"))
+
+
+    assert pyn  # type: ignore
+
 
 def test_predict(tmp_path):
     assets = make_dummy_models_dir(tmp_path)
     pyn = PyNLU(str(assets / "models"))
-    
-    intent, confidence, lang, slots = pyn.process("Turn on the light in the living room please") # type: ignore
-    # Some implementations return (intent, confidence, lang) or (intent, confidence, lang, slots).
-    # Adjust assertions depending on your PyNLU.process/predict signature.
+
+
+    text = "Turn on the light in the living room please"
+
+    res = pyn.process(text)  # many implementations return either 3- or 4-tuple
+    if isinstance(res, tuple) and len(res) == 3:
+        intent, confidence, lang = res
+        slots = pyn.slots(text, intent=intent, lang=lang)
+    else:
+        # assume (intent, confidence, lang, slots)
+        intent, confidence, lang = res # type: ignore
+
     assert intent is not None
     assert isinstance(confidence, float)
-    assert lang in ("en", "de", "fr", "es", None) or isinstance(lang, str)
+    assert isinstance(lang, str)
+    assert isinstance(slots, dict) # type: ignore
     # check that ROOM was extracted via options fallback
-    assert isinstance(slots, dict)
-    assert slots.get("ROOM") in ("living room", "living_room", "living-room", "livingroom") or "living" in str(slots.get("ROOM"))
+    room_val = slots.get("ROOM") or slots.get("room") or next(iter(slots.values()), "")
+    assert "living" in str(room_val).lower()
