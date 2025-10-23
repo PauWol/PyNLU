@@ -160,7 +160,7 @@ def detect_example_language(example: str, allowed_langs: List[str]) -> str:
 _SPACE_RE = re.compile(r"\s+")
 
 def _escape_literal(text: str) -> str:
-    """Escape literal text and normalize spaces to '\s+' for flexible matching."""
+    """Escape literal text and normalize spaces to '\s+' for flexible matching.""" # type: ignore
     text = text.strip()
     if not text:
         return ""

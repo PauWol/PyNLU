@@ -1,0 +1,338 @@
+{
+  "saved_at": "2025-10-23T22:06:21.324837Z",
+  "languages": [
+    "en",
+    "de"
+  ],
+  "intent_slot_specs": {
+    "get_weather_now": {
+      "LOCATION": {
+        "type": "str",
+        "free_text": true
+      }
+    },
+    "get_weather_tomorrow": {
+      "LOCATION": {
+        "type": "str",
+        "free_text": true
+      }
+    },
+    "turn_on_lights": {
+      "NAME": {
+        "type": "str",
+        "free_text": true
+      },
+      "ROOM": {
+        "type": "str",
+        "free_text": true,
+        "options": [
+          "bedroom",
+          "kitchen",
+          "living room",
+          "bathroom",
+          "office",
+          "garage"
+        ]
+      }
+    },
+    "turn_off_lights": {
+      "NAME": {
+        "type": "str",
+        "free_text": true
+      },
+      "ROOM": {
+        "type": "str",
+        "free_text": true,
+        "options": [
+          "bedroom",
+          "kitchen",
+          "living room",
+          "bathroom",
+          "office",
+          "garage"
+        ]
+      }
+    },
+    "set_temperature": {
+      "VALUE": {
+        "type": "int"
+      },
+      "ROOM": {
+        "type": "str",
+        "free_text": true
+      }
+    },
+    "play_music": {
+      "SONG": {
+        "type": "str",
+        "free_text": true
+      },
+      "ARTIST": {
+        "type": "str",
+        "free_text": true
+      },
+      "GENRE": {
+        "type": "str",
+        "free_text": true
+      }
+    },
+    "stop_music": {},
+    "set_alarm": {
+      "TIME": {
+        "type": "str",
+        "free_text": true
+      }
+    },
+    "check_time": {},
+    "open_curtains": {
+      "ROOM": {
+        "type": "str",
+        "free_text": true
+      }
+    },
+    "close_curtains": {
+      "ROOM": {
+        "type": "str",
+        "free_text": true
+      }
+    },
+    "control_tv": {
+      "CHANNEL": {
+        "type": "str",
+        "free_text": true
+      }
+    },
+    "add_to_shopping_list": {
+      "ITEM": {
+        "type": "str",
+        "free_text": true
+      }
+    },
+    "check_news": {},
+    "control_door": {
+      "DOOR": {
+        "type": "str",
+        "free_text": true,
+        "options": [
+          "front door",
+          "back door",
+          "garage door"
+        ]
+      }
+    }
+  },
+  "intent_patterns": {
+    "en": {
+      "get_weather_now": [
+        "(?i)\\b\\s+get\\s+the\\s+weather\\s+in(?P<LOCATION>.+)$\\b",
+        "(?i)\\b\\s+what\\s+is\\s+the\\s+weather\\s+like\\s+in(?P<LOCATION>.+)$\\b",
+        "(?i)\\b\\s+tell\\s+me\\s+the\\s+weather\\s+in(?P<LOCATION>.+)$\\b",
+        "(?i)\\b\\s+what’s\\s+the\\s+forecast\\s+for(?P<LOCATION>.+)$\\b",
+        "(?i)\\b\\s+how’s\\s+the\\s+weather\\s+right\\s+now\\s+in(?P<LOCATION>.+)$\\b",
+        "(?i)\\b\\s+will\\s+it\\s+rain\\s+in(?P<LOCATION>.+?)(?=\\s+today)\\s+today\\b",
+        "(?i)\\b\\s+is\\s+it\\s+sunny\\s+in(?P<LOCATION>.+)$\\b"
+      ],
+      "get_weather_tomorrow": [
+        "(?i)\\b\\s+get\\s+the\\s+weather\\s+in(?P<LOCATION>.+?)(?=\\s+for\\s+tomorrow)\\s+for\\s+tomorrow\\b",
+        "(?i)\\b\\s+what\\s+is\\s+the\\s+weather\\s+like\\s+in(?P<LOCATION>.+?)(?=\\s+for\\s+tomorrow)\\s+for\\s+tomorrow\\b",
+        "(?i)\\b\\s+tell\\s+me\\s+the\\s+weather\\s+for\\s+tomorrow\\s+in(?P<LOCATION>.+)$\\b",
+        "(?i)\\b\\s+what’s\\s+the\\s+forecast\\s+for\\s+tomorrow\\s+in(?P<LOCATION>.+)$\\b",
+        "(?i)\\b\\s+will\\s+it\\s+rain\\s+tomorrow\\s+in(?P<LOCATION>.+?)(?=\\s+today)\\s+today\\b",
+        "(?i)\\b\\s+is\\s+it\\s+sunny\\s+tomorrow\\s+in(?P<LOCATION>.+)$\\b",
+        "(?i)\\b\\s+Regnet\\s+es\\s+in(?P<LOCATION>.+?)(?=\\s+morgen)\\s+morgen\\b",
+        "(?i)\\b\\s+Ist\\s+es\\s+sonnig\\s+in(?P<LOCATION>.+?)(?=\\s+morgen)\\s+morgen\\b"
+      ],
+      "turn_on_lights": [
+        "(?i)\\b\\s+turn\\s+on\\s+the\\s+lights\\s+in\\s+the(?P<ROOM>(?:bedroom|kitchen|living\\s+room|bathroom|office|garage))\\b",
+        "(?i)\\b\\s+switch\\s+on\\s+the\\s+lights\\s+in\\s+the(?P<ROOM>(?:bedroom|kitchen|living\\s+room|bathroom|office|garage))\\b",
+        "(?i)\\b\\s+activate\\s+the\\s+lights\\s+in\\s+the(?P<ROOM>(?:bedroom|kitchen|living\\s+room|bathroom|office|garage))\\b",
+        "(?i)\\b\\s+enable\\s+the(?P<ROOM>(?:bedroom|kitchen|living\\s+room|bathroom|office|garage))\\s+lights\\b",
+        "(?i)\\b\\s+turn\\s+the(?P<ROOM>(?:bedroom|kitchen|living\\s+room|bathroom|office|garage))\\s+light\\s+on\\b",
+        "(?i)\\b\\s+turn\\s+on(?P<NAME>.+?)(?=\\s+'s\\s+lamp\\s+in\\s+the)\\s+'s\\s+lamp\\s+in\\s+the(?P<ROOM>(?:bedroom|kitchen|living\\s+room|bathroom|office|garage))\\b"
+      ],
+      "turn_off_lights": [
+        "(?i)\\b\\s+turn\\s+off\\s+the\\s+lights\\s+in\\s+the(?P<ROOM>(?:bedroom|kitchen|living\\s+room|bathroom|office|garage))\\b",
+        "(?i)\\b\\s+switch\\s+off\\s+the\\s+lights\\s+in\\s+the(?P<ROOM>(?:bedroom|kitchen|living\\s+room|bathroom|office|garage))\\b",
+        "(?i)\\b\\s+deactivate\\s+the\\s+lights\\s+in\\s+the(?P<ROOM>(?:bedroom|kitchen|living\\s+room|bathroom|office|garage))\\b",
+        "(?i)\\b\\s+disable\\s+the(?P<ROOM>(?:bedroom|kitchen|living\\s+room|bathroom|office|garage))\\s+lights\\b",
+        "(?i)\\b\\s+turn\\s+the(?P<ROOM>(?:bedroom|kitchen|living\\s+room|bathroom|office|garage))\\s+light\\s+off\\b",
+        "(?i)\\b\\s+turn\\s+off(?P<NAME>.+?)(?=\\s+'s\\s+lamp\\s+in\\s+the)\\s+'s\\s+lamp\\s+in\\s+the(?P<ROOM>(?:bedroom|kitchen|living\\s+room|bathroom|office|garage))\\b"
+      ],
+      "set_temperature": [
+        "(?i)\\b\\s+set\\s+the\\s+thermostat\\s+to(?P<VALUE>\\S+(?:\\s+\\S+){0,3})\\s+degrees\\b",
+        "(?i)\\b\\s+adjust\\s+temperature\\s+to(?P<VALUE>\\S+(?:\\s+\\S+){0,3})\\b",
+        "(?i)\\b\\s+make\\s+it(?P<VALUE>\\S+(?:\\s+\\S+){0,3})\\s+degrees\\s+in\\s+the(?P<ROOM>.+)$\\b",
+        "(?i)\\b\\s+mach\\s+es(?P<VALUE>\\S+(?:\\s+\\S+){0,3})\\s+Grad\\s+warm\\b"
+      ],
+      "play_music": [
+        "(?i)\\b\\s+play\\s+some\\s+music\\b",
+        "(?i)\\b\\s+play(?P<GENRE>.+?)(?=\\s+music)\\s+music\\b",
+        "(?i)\\b\\s+play(?P<SONG>.+)$\\b",
+        "(?i)\\b\\s+play(?P<SONG>.+?)(?=\\s+by)\\s+by(?P<ARTIST>.+)$\\b"
+      ],
+      "stop_music": [
+        "(?i)\\b\\s+stop\\s+the\\s+music\\b",
+        "(?i)\\b\\s+pause\\s+the\\s+music\\b",
+        "(?i)\\b\\s+mute\\s+the\\s+music\\b",
+        "(?i)\\b\\s+Musik\\s+stoppen\\b",
+        "(?i)\\b\\s+Musik\\s+pausieren\\b"
+      ],
+      "set_alarm": [
+        "(?i)\\b\\s+set\\s+an\\s+alarm\\s+for(?P<TIME>.+)$\\b",
+        "(?i)\\b\\s+wake\\s+me\\s+up\\s+at(?P<TIME>.+)$\\b",
+        "(?i)\\b\\s+create\\s+an\\s+alarm\\s+at(?P<TIME>.+)$\\b"
+      ],
+      "check_time": [
+        "(?i)\\b\\s+what\\s+time\\s+is\\s+it\\b",
+        "(?i)\\b\\s+tell\\s+me\\s+the\\s+time\\b"
+      ],
+      "open_curtains": [
+        "(?i)\\b\\s+open\\s+the\\s+curtains\\s+in\\s+the(?P<ROOM>.+)$\\b",
+        "(?i)\\b\\s+draw\\s+the\\s+curtains\\s+in\\s+the(?P<ROOM>.+)$\\b"
+      ],
+      "close_curtains": [
+        "(?i)\\b\\s+close\\s+the\\s+curtains\\s+in\\s+the(?P<ROOM>.+)$\\b",
+        "(?i)\\b\\s+shut\\s+the\\s+curtains\\s+in\\s+the(?P<ROOM>.+)$\\b"
+      ],
+      "control_tv": [
+        "(?i)\\b\\s+turn\\s+on\\s+the\\s+TV\\b",
+        "(?i)\\b\\s+turn\\s+off\\s+the\\s+TV\\b",
+        "(?i)\\b\\s+change\\s+channel\\s+to(?P<CHANNEL>.+)$\\b",
+        "(?i)\\b\\s+volume\\s+up\\s+on\\s+the\\s+TV\\b",
+        "(?i)\\b\\s+TV\\s+lauter\\b"
+      ],
+      "add_to_shopping_list": [
+        "(?i)\\b\\s+add(?P<ITEM>.+?)(?=\\s+to\\s+my\\s+shopping\\s+list)\\s+to\\s+my\\s+shopping\\s+list\\b",
+        "(?i)\\b\\s+put(?P<ITEM>.+?)(?=\\s+on\\s+the\\s+shopping\\s+list)\\s+on\\s+the\\s+shopping\\s+list\\b"
+      ],
+      "check_news": [
+        "(?i)\\b\\s+what’s\\s+the\\s+news\\b",
+        "(?i)\\b\\s+tell\\s+me\\s+the\\s+latest\\s+news\\b"
+      ],
+      "control_door": [
+        "(?i)\\b\\s+lock\\s+the(?P<DOOR>(?:front\\s+door|back\\s+door|garage\\s+door))\\b",
+        "(?i)\\b\\s+unlock\\s+the(?P<DOOR>(?:front\\s+door|back\\s+door|garage\\s+door))\\b",
+        "(?i)\\b\\s+open\\s+the(?P<DOOR>(?:front\\s+door|back\\s+door|garage\\s+door))\\b",
+        "(?i)\\b\\s+close\\s+the(?P<DOOR>(?:front\\s+door|back\\s+door|garage\\s+door))\\b"
+      ]
+    },
+    "de": {
+      "get_weather_now": [
+        "(?i)\\b\\s+Wie\\s+ist\\s+das\\s+Wetter\\s+in(?P<LOCATION>.+)$\\b",
+        "(?i)\\b\\s+Wie\\s+wird\\s+das\\s+Wetter\\s+heute\\b",
+        "(?i)\\b\\s+Regnet\\s+es\\s+in(?P<LOCATION>.+)$\\b",
+        "(?i)\\b\\s+Ist\\s+es\\s+sonnig\\s+in(?P<LOCATION>.+)$\\b",
+        "(?i)\\b\\s+Wie\\s+ist\\s+die\\s+Wettervorhersage\\s+für(?P<LOCATION>.+)$\\b"
+      ],
+      "get_weather_tomorrow": [
+        "(?i)\\b\\s+Wie\\s+ist\\s+das\\s+Wetter\\s+in(?P<LOCATION>.+?)(?=\\s+für\\s+morgen)\\s+für\\s+morgen\\b",
+        "(?i)\\b\\s+Wie\\s+wird\\s+das\\s+Wetter\\s+morgen\\b",
+        "(?i)\\b\\s+Wie\\s+ist\\s+die\\s+Wettervorhersage\\s+für\\s+morgen\\s+in(?P<LOCATION>.+)$\\b"
+      ],
+      "turn_on_lights": [
+        "(?i)\\b\\s+schalte\\s+das\\s+Licht(?P<NAME>.+?)(?=\\s+im)\\s+im(?P<ROOM>(?:bedroom|kitchen|living\\s+room|bathroom|office|garage))\\s+an\\b",
+        "(?i)\\b\\s+schalte\\s+die\\s+Lichter\\s+im(?P<ROOM>(?:bedroom|kitchen|living\\s+room|bathroom|office|garage))\\s+an\\b",
+        "(?i)\\b\\s+aktiviere\\s+die\\s+Lichter\\s+im(?P<ROOM>(?:bedroom|kitchen|living\\s+room|bathroom|office|garage))\\b",
+        "(?i)\\b\\s+mach\\s+das\\s+Licht\\s+im(?P<ROOM>(?:bedroom|kitchen|living\\s+room|bathroom|office|garage))\\s+an\\b",
+        "(?i)\\b\\s+Licht\\s+im(?P<ROOM>(?:bedroom|kitchen|living\\s+room|bathroom|office|garage))\\s+einschalten\\b",
+        "(?i)\\b\\s+schalte(?P<NAME>.+?)(?=\\s+Lampe\\s+im)\\s+Lampe\\s+im(?P<ROOM>(?:bedroom|kitchen|living\\s+room|bathroom|office|garage))\\s+an\\b"
+      ],
+      "turn_off_lights": [
+        "(?i)\\b\\s+schalte\\s+das\\s+Licht(?P<NAME>.+?)(?=\\s+im)\\s+im(?P<ROOM>(?:bedroom|kitchen|living\\s+room|bathroom|office|garage))\\s+aus\\b",
+        "(?i)\\b\\s+schalte\\s+die\\s+Lichter\\s+im(?P<ROOM>(?:bedroom|kitchen|living\\s+room|bathroom|office|garage))\\s+aus\\b",
+        "(?i)\\b\\s+deaktiviere\\s+die\\s+Lichter\\s+im(?P<ROOM>(?:bedroom|kitchen|living\\s+room|bathroom|office|garage))\\b",
+        "(?i)\\b\\s+mach\\s+das\\s+Licht\\s+im(?P<ROOM>(?:bedroom|kitchen|living\\s+room|bathroom|office|garage))\\s+aus\\b",
+        "(?i)\\b\\s+Licht\\s+im(?P<ROOM>(?:bedroom|kitchen|living\\s+room|bathroom|office|garage))\\s+ausschalten\\b",
+        "(?i)\\b\\s+schalte(?P<NAME>.+?)(?=\\s+Lampe\\s+im)\\s+Lampe\\s+im(?P<ROOM>(?:bedroom|kitchen|living\\s+room|bathroom|office|garage))\\s+aus\\b"
+      ],
+      "set_temperature": [
+        "(?i)\\b\\s+stelle\\s+die\\s+Temperatur\\s+auf(?P<VALUE>\\S+(?:\\s+\\S+){0,3})\\s+Grad\\b",
+        "(?i)\\b\\s+Temperatur\\s+im(?P<ROOM>.+?)(?=\\s+auf)\\s+auf(?P<VALUE>\\S+(?:\\s+\\S+){0,3})\\s+Grad\\s+einstellen\\b"
+      ],
+      "play_music": [
+        "(?i)\\b\\s+spiele\\s+Musik\\b",
+        "(?i)\\b\\s+spiele(?P<GENRE>.+?)(?=\\s+Musik)\\s+Musik\\b",
+        "(?i)\\b\\s+spiele\\s+das\\s+Lied(?P<SONG>.+)$\\b",
+        "(?i)\\b\\s+spiele(?P<SONG>.+?)(?=\\s+von)\\s+von(?P<ARTIST>.+)$\\b"
+      ],
+      "stop_music": [
+        "(?i)\\b\\s+hör\\s+mit\\s+der\\s+Musik\\s+auf\\b"
+      ],
+      "set_alarm": [
+        "(?i)\\b\\s+stelle\\s+einen\\s+Wecker\\s+auf(?P<TIME>.+)$\\b",
+        "(?i)\\b\\s+Wecker\\s+für(?P<TIME>.+?)(?=\\s+einstellen)\\s+einstellen\\b"
+      ],
+      "check_time": [
+        "(?i)\\b\\s+wie\\s+spät\\s+ist\\s+es\\b",
+        "(?i)\\b\\s+sag\\s+mir\\s+die\\s+Uhrzeit\\b"
+      ],
+      "open_curtains": [
+        "(?i)\\b\\s+öffne\\s+die\\s+Vorhänge\\s+im(?P<ROOM>.+)$\\b",
+        "(?i)\\b\\s+mach\\s+die\\s+Vorhänge\\s+im(?P<ROOM>.+?)(?=\\s+auf)\\s+auf\\b"
+      ],
+      "close_curtains": [
+        "(?i)\\b\\s+zieh\\s+die\\s+Vorhänge\\s+im(?P<ROOM>.+?)(?=\\s+zu)\\s+zu\\b",
+        "(?i)\\b\\s+schließe\\s+die\\s+Vorhänge\\s+im(?P<ROOM>.+)$\\b"
+      ],
+      "control_tv": [
+        "(?i)\\b\\s+TV\\s+einschalten\\b",
+        "(?i)\\b\\s+TV\\s+ausschalten\\b",
+        "(?i)\\b\\s+schalte\\s+auf\\s+Kanal(?P<CHANNEL>.+)$\\b"
+      ],
+      "add_to_shopping_list": [
+        "(?i)\\b\\s+füge(?P<ITEM>.+?)(?=\\s+zur\\s+Einkaufsliste\\s+hinzu)\\s+zur\\s+Einkaufsliste\\s+hinzu\\b",
+        "(?i)\\b\\s+setze(?P<ITEM>.+?)(?=\\s+auf\\s+die\\s+Einkaufsliste)\\s+auf\\s+die\\s+Einkaufsliste\\b"
+      ],
+      "check_news": [
+        "(?i)\\b\\s+gib\\s+mir\\s+die\\s+neuesten\\s+Nachrichten\\b",
+        "(?i)\\b\\s+was\\s+sind\\s+die\\s+aktuellen\\s+Nachrichten\\b"
+      ],
+      "control_door": [
+        "(?i)\\b\\s+schließe\\s+die(?P<DOOR>(?:front\\s+door|back\\s+door|garage\\s+door))\\b",
+        "(?i)\\b\\s+öffne\\s+die(?P<DOOR>(?:front\\s+door|back\\s+door|garage\\s+door))\\b"
+      ]
+    }
+  },
+  "trained_meta": {
+    "en": {
+      "n_examples": 62,
+      "classes": [
+        "turn_off_lights",
+        "add_to_shopping_list",
+        "check_news",
+        "set_alarm",
+        "get_weather_now",
+        "check_time",
+        "play_music",
+        "open_curtains",
+        "get_weather_tomorrow",
+        "control_tv",
+        "control_door",
+        "turn_on_lights",
+        "stop_music",
+        "close_curtains",
+        "set_temperature"
+      ]
+    },
+    "de": {
+      "n_examples": 44,
+      "classes": [
+        "turn_off_lights",
+        "add_to_shopping_list",
+        "check_news",
+        "set_alarm",
+        "get_weather_now",
+        "check_time",
+        "play_music",
+        "open_curtains",
+        "get_weather_tomorrow",
+        "control_tv",
+        "control_door",
+        "turn_on_lights",
+        "stop_music",
+        "close_curtains",
+        "set_temperature"
+      ]
+    }
+  }
+}

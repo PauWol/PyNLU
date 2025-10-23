@@ -1,0 +1,220 @@
+languages: [en, de]
+
+intents:
+  - name: get_weather_now
+    examples:
+      - "get the weather in [LOCATION]"
+      - "what is the weather like in [LOCATION]"
+      - "tell me the weather in [LOCATION]"
+      - "what’s the forecast for [LOCATION]"
+      - "how’s the weather right now in [LOCATION]"
+      - "will it rain in [LOCATION] today"
+      - "is it sunny in [LOCATION]"
+      - "Wie ist das Wetter in [LOCATION]"
+      - "Wie wird das Wetter heute"
+      - "Regnet es in [LOCATION]"
+      - "Ist es sonnig in [LOCATION]"
+      - "Wie ist die Wettervorhersage für [LOCATION]"
+    slots:
+      LOCATION:
+        type: str
+        free_text: true
+
+  - name: get_weather_tomorrow
+    examples:
+      - "get the weather in [LOCATION] for tomorrow"
+      - "what is the weather like in [LOCATION] for tomorrow"
+      - "tell me the weather for tomorrow in [LOCATION]"
+      - "what’s the forecast for tomorrow in [LOCATION]"
+      - "will it rain tomorrow in [LOCATION] today"
+      - "is it sunny tomorrow in [LOCATION]"
+      - "Wie ist das Wetter in [LOCATION] für morgen"
+      - "Wie wird das Wetter morgen"
+      - "Regnet es in [LOCATION] morgen"
+      - "Ist es sonnig in [LOCATION] morgen"
+      - "Wie ist die Wettervorhersage für morgen in [LOCATION]"
+    slots:
+      LOCATION:
+        type: str
+        free_text: true
+
+  - name: turn_on_lights
+    examples:
+      - "turn on the lights in the [ROOM]"
+      - "switch on the lights in the [ROOM]"
+      - "activate the lights in the [ROOM]"
+      - "enable the [ROOM] lights"
+      - "turn the [ROOM] light on"
+      - "turn on [NAME]'s lamp in the [ROOM]"
+      - "schalte das Licht [NAME] im [ROOM] an"
+      - "schalte die Lichter im [ROOM] an"
+      - "aktiviere die Lichter im [ROOM]"
+      - "mach das Licht im [ROOM] an"
+      - "Licht im [ROOM] einschalten"
+      - "schalte [NAME] Lampe im [ROOM] an"
+    slots:
+      NAME:
+        type: str
+        free_text: true
+      ROOM:
+        type: str
+        free_text: true
+        options:
+          ["bedroom", "kitchen", "living room", "bathroom", "office", "garage"]
+
+  - name: turn_off_lights
+    examples:
+      - "turn off the lights in the [ROOM]"
+      - "switch off the lights in the [ROOM]"
+      - "deactivate the lights in the [ROOM]"
+      - "disable the [ROOM] lights"
+      - "turn the [ROOM] light off"
+      - "turn off [NAME]'s lamp in the [ROOM]"
+      - "schalte das Licht [NAME] im [ROOM] aus"
+      - "schalte die Lichter im [ROOM] aus"
+      - "deaktiviere die Lichter im [ROOM]"
+      - "mach das Licht im [ROOM] aus"
+      - "Licht im [ROOM] ausschalten"
+      - "schalte [NAME] Lampe im [ROOM] aus"
+    slots:
+      NAME:
+        type: str
+        free_text: true
+      ROOM:
+        type: str
+        free_text: true
+        options:
+          ["bedroom", "kitchen", "living room", "bathroom", "office", "garage"]
+
+  - name: set_temperature
+    examples:
+      - "set the thermostat to [VALUE] degrees"
+      - "adjust temperature to [VALUE]"
+      - "make it [VALUE] degrees in the [ROOM]"
+      - "stelle die Temperatur auf [VALUE] Grad"
+      - "Temperatur im [ROOM] auf [VALUE] Grad einstellen"
+      - "mach es [VALUE] Grad warm"
+    slots:
+      VALUE:
+        type: int
+      ROOM:
+        type: str
+        free_text: true
+
+  - name: play_music
+    examples:
+      - "play some music"
+      - "play [GENRE] music"
+      - "play [SONG]"
+      - "play [SONG] by [ARTIST]"
+      - "spiele Musik"
+      - "spiele [GENRE] Musik"
+      - "spiele das Lied [SONG]"
+      - "spiele [SONG] von [ARTIST]"
+    slots:
+      SONG:
+        type: str
+        free_text: true
+      ARTIST:
+        type: str
+        free_text: true
+      GENRE:
+        type: str
+        free_text: true
+
+  - name: stop_music
+    examples:
+      - "stop the music"
+      - "pause the music"
+      - "mute the music"
+      - "hör mit der Musik auf"
+      - "Musik stoppen"
+      - "Musik pausieren"
+
+  - name: set_alarm
+    examples:
+      - "set an alarm for [TIME]"
+      - "wake me up at [TIME]"
+      - "create an alarm at [TIME]"
+      - "stelle einen Wecker auf [TIME]"
+      - "Wecker für [TIME] einstellen"
+    slots:
+      TIME:
+        type: str
+        free_text: true
+
+  - name: check_time
+    examples:
+      - "what time is it"
+      - "tell me the time"
+      - "wie spät ist es"
+      - "sag mir die Uhrzeit"
+
+  - name: open_curtains
+    examples:
+      - "open the curtains in the [ROOM]"
+      - "draw the curtains in the [ROOM]"
+      - "öffne die Vorhänge im [ROOM]"
+      - "mach die Vorhänge im [ROOM] auf"
+    slots:
+      ROOM:
+        type: str
+        free_text: true
+
+  - name: close_curtains
+    examples:
+      - "close the curtains in the [ROOM]"
+      - "shut the curtains in the [ROOM]"
+      - "zieh die Vorhänge im [ROOM] zu"
+      - "schließe die Vorhänge im [ROOM]"
+    slots:
+      ROOM:
+        type: str
+        free_text: true
+
+  - name: control_tv
+    examples:
+      - "turn on the TV"
+      - "turn off the TV"
+      - "change channel to [CHANNEL]"
+      - "volume up on the TV"
+      - "TV einschalten"
+      - "TV ausschalten"
+      - "schalte auf Kanal [CHANNEL]"
+      - "TV lauter"
+    slots:
+      CHANNEL:
+        type: str
+        free_text: true
+
+  - name: add_to_shopping_list
+    examples:
+      - "add [ITEM] to my shopping list"
+      - "put [ITEM] on the shopping list"
+      - "füge [ITEM] zur Einkaufsliste hinzu"
+      - "setze [ITEM] auf die Einkaufsliste"
+    slots:
+      ITEM:
+        type: str
+        free_text: true
+
+  - name: check_news
+    examples:
+      - "what’s the news"
+      - "tell me the latest news"
+      - "gib mir die neuesten Nachrichten"
+      - "was sind die aktuellen Nachrichten"
+
+  - name: control_door
+    examples:
+      - "lock the [DOOR]"
+      - "unlock the [DOOR]"
+      - "open the [DOOR]"
+      - "close the [DOOR]"
+      - "schließe die [DOOR]"
+      - "öffne die [DOOR]"
+    slots:
+      DOOR:
+        type: str
+        free_text: true
+        options: ["front door", "back door", "garage door"]
