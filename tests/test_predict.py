@@ -48,12 +48,8 @@ def make_dummy_models_dir(tmp_path):
 def test_main_init(tmp_path, monkeypatch):
     assets = make_dummy_models_dir(tmp_path)
 
-    # prevent spaCy download if PyNLU tries to load models on init by patching util loader
-    try:
-        monkeypatch.setattr("pynlu.util.load_class_lang_models", lambda cls: None)
-    except Exception:
-        # If monkeypatch fails (older pytest), ignore - we still created models locally
-        pass
+    # Prevent spaCy downloads: patch the util loader before PyNLU is created
+    monkeypatch.setattr("pynlu.util.load_class_lang_models", lambda cls: None)
 
     pyn = PyNLU(str(assets / "models"))
 
@@ -61,10 +57,13 @@ def test_main_init(tmp_path, monkeypatch):
     assert pyn  # type: ignore
 
 
-def test_predict(tmp_path):
+def test_predict(tmp_path, monkeypatch):
     assets = make_dummy_models_dir(tmp_path)
-    pyn = PyNLU(str(assets / "models"))
 
+    # IMPORTANT: patch the spaCy loader before creating PyNLU so no downloads occur
+    monkeypatch.setattr("pynlu.util.load_class_lang_models", lambda cls: None)
+
+    pyn = PyNLU(str(assets / "models"))
 
     text = "Turn on the light in the living room please"
 
@@ -74,12 +73,11 @@ def test_predict(tmp_path):
         slots = pyn.slots(text, intent=intent, lang=lang)
     else:
         # assume (intent, confidence, lang, slots)
-        intent, confidence, lang = res # type: ignore
+        intent, confidence, lang = res
 
     assert intent is not None
     assert isinstance(confidence, float)
     assert isinstance(lang, str)
-    assert isinstance(slots, dict) # type: ignore
-    # check that ROOM was extracted via options fallback
+    assert isinstance(slots, dict)
     room_val = slots.get("ROOM") or slots.get("room") or next(iter(slots.values()), "")
     assert "living" in str(room_val).lower()
