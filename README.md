@@ -2,7 +2,27 @@
 
 PyNLU is a lightweight Python NLU library for **intent recognition** and **slot extraction** using `spaCy` and `scikit-learn`. It supports multiple languages (English, German, French, Spanish) and is designed for easy deployment and integration in applications.
 
----
+
+
+## Table of Contents
+
+- [PyNLU - Python Natural Language Understanding Library](#pynlu---python-natural-language-understanding-library)
+  - [Table of Contents](#table-of-contents)
+  - [Features](#features)
+  - [Installation](#installation)
+    - [Option 1: Install directly via pip from GitHub (recommended for simple usage)](#option-1-install-directly-via-pip-from-github-recommended-for-simple-usage)
+    - [Option 2: Install from GitHub source (for development / source manipulation)](#option-2-install-from-github-source-for-development--source-manipulation)
+  - [Project Structure](#project-structure)
+  - [Config File (`config.yml`)](#config-file-configyml)
+  - [Training](#training)
+  - [Using PyNLU](#using-pynlu)
+  - [Example Intents](#example-intents)
+  - [Usage Tips](#usage-tips)
+  - [License](#license)
+  - [Contributing](#contributing)
+  - [References](#references)
+
+
 
 ## Features
 
@@ -13,7 +33,7 @@ PyNLU is a lightweight Python NLU library for **intent recognition** and **slot 
 * Easy training, saving, and loading of models.
 * Lightweight, modular, and easy to extend.
 
----
+
 
 ## Installation
 
@@ -27,36 +47,36 @@ pip install git+https://github.com/PauWol/PyNLU.git
 
 *This option is recommended for most users who only want to use PyNLU without editing the source.*
 
-
 ### Option 2: Install from GitHub source (for development / source manipulation)
 
 1. Clone the repository
-   
-  ```bash
-  git clone https://github.com/PauWol/PyNLU.git
-  cd PyNLU
-  ```
+
+```bash
+git clone https://github.com/PauWol/PyNLU.git
+cd PyNLU
+```
+
 2. `Optional`: create a virtual environment (recommended)
-   
-  ```bash
-  python -m venv venv
-  source venv/bin/activate  # Linux/macOS
-  venv\Scripts\activate     # Windows
-  ```
+
+```bash
+python -m venv venv
+source venv/bin/activate  # Linux/macOS
+venv\Scripts\activate     # Windows
+```
+
 3. Install dependencies
-   
-  - Either using `requirements.txt`
-    ```bash
-    pip install -r requirements.txt
-    ```
-  - Or `setup.py` as actual package
-     ```bash
-    python setup.py install
-    ```
 
+* Either using `requirements.txt`
 
+  ```bash
+  pip install -r requirements.txt
+  ```
+* Or `setup.py` as actual package
 
----
+  ```bash
+  python setup.py install
+  ```
+
 
 ## Project Structure
 
@@ -70,7 +90,7 @@ PyNLU/
 └── README.md
 ```
 
----
+
 
 ## Config File (`config.yml`)
 
@@ -96,7 +116,7 @@ intents:
 * `intents`: Each intent has a `name`, `examples` for training, and `slots` with type/options.
 * `slots`: Can have `type`, `free_text`, and `options` for predefined values.
 
----
+
 
 ## Training
 
@@ -113,7 +133,7 @@ trainer.save()
 * `train()`: Trains intent classifiers per language.
 * `save()`: Saves models to `assets/models` for later use.
 
----
+
 
 ## Using PyNLU
 
@@ -131,7 +151,7 @@ print(intent, confidence, lang, slots)
 * `predict(text)`: Returns a tuple `(intent, confidence, language, slots)`.
 * Slot extraction handles placeholders, free-text slots, and option matching.
 
----
+
 
 ## Example Intents
 
@@ -143,7 +163,7 @@ print(intent, confidence, lang, slots)
 
 Slots can be configured for free text or predefined options.
 
----
+
 
 ## Usage Tips
 
@@ -152,19 +172,18 @@ Slots can be configured for free text or predefined options.
 * Update spaCy models for each language you use.
 * After modifying config, always retrain models.
 
----
+
 
 ## License
 
-MIT License
+[MIT License](LICENSE.md)
 
----
+
 
 ## Contributing
 
 Feel free to contribute by adding new intents, languages, or improving slot extraction logic. Open an issue or submit a pull request on GitHub.
 
----
 
 ## References
 
