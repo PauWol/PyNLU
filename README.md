@@ -176,7 +176,7 @@ Slots can be configured for free text or predefined options.
 
 ## License
 
-[MIT License](LICENSE.md)
+[MIT License](LICENSE)
 
 
 
