@@ -30,18 +30,18 @@ pip install git+https://github.com/PauWol/PyNLU.git
 
 ### Option 2: Install from GitHub source (for development / source manipulation)
 
-- Step-1 Clone the repository
+- 1. Clone the repository
   ```bash
   git clone https://github.com/PauWol/PyNLU.git
   cd PyNLU
   ```
-- Step-2 `Optional`: create a virtual environment (recommended)
+- 2. `Optional`: create a virtual environment (recommended)
   ```bash
   python -m venv venv
   source venv/bin/activate  # Linux/macOS
   venv\Scripts\activate     # Windows
   ```
-- Step-3 Install dependencies
+- 3. Install dependencies
   - Either using `requirements.txt`
     ```bash
     pip install -r requirements.txt
