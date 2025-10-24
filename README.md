@@ -121,7 +121,7 @@ from pynlu import PyNLU
 
 pyn = PyNLU("./assets/models")
 
-intent, confidence, lang, slots = pyn.predict("Wie wird das Wetter heute in Schweich")
+intent, confidence, lang, slots = pyn.predict("Wie wird das Wetter heute in London")
 print(intent, confidence, lang, slots)
 ```
 
