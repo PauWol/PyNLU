@@ -42,7 +42,7 @@ pip install git+https://github.com/PauWol/PyNLU.git
   venv\Scripts\activate     # Windows
   ```
 - Step-3 Install dependencies
-  - Either using `Requirements.txt`
+  - Either using `requirements.txt`
     ```bash
     pip install -r requirements.txt
     ```
