@@ -17,14 +17,33 @@ PyNLU is a lightweight Python NLU library for **intent recognition** and **slot 
 
 ## Installation
 
-Install PyNLU dependencies in a virtual environment:
+### Option 1: Install from GitHub source (for development / source manipulation)
 
 ```bash
+# Clone the repository
+git clone https://github.com/PauWol/PyNLU.git
+cd PyNLU
+
+# Optional: create a virtual environment (recommended)
 python -m venv venv
 source venv/bin/activate  # Linux/macOS
 venv\Scripts\activate     # Windows
+
+# Install dependencies
 pip install -r requirements.txt
 ```
+
+### Option 2: Install directly via pip from GitHub (recommended for simple usage)
+
+This installs PyNLU as a regular package without needing to clone the repo or modify source files:
+
+```bash
+pip install git+https://github.com/PauWol/PyNLU.git
+```
+
+*This option is recommended for most users who only want to use PyNLU without editing the source.*
+
+---
 
 ## Project Structure
 
@@ -60,7 +79,7 @@ intents:
         free_text: true
 ```
 
-* `languages`: List of supported language codes (`Important`).
+* `languages`: List of supported language codes.
 * `intents`: Each intent has a `name`, `examples` for training, and `slots` with type/options.
 * `slots`: Can have `type`, `free_text`, and `options` for predefined values.
 
