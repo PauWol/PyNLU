@@ -1,5 +1,6 @@
 import subprocess
 import sys
+import importlib.util
 
 import spacy
 from sklearn.feature_extraction.text import TfidfVectorizer
@@ -9,6 +10,19 @@ import re
 from typing import Dict, List, Tuple, Pattern, Any
 
 
+class PipNotInstalledError(RuntimeError):
+    def __init__(self, message=None):
+        super().__init__(
+            message or
+            "Pip seems to be missing in this environment. Please install it."
+        )
+
+def ensure_pip_installed():
+    if importlib.util.find_spec("pip") is None:
+        raise PipNotInstalledError(
+            "pip is missing from this Python environment."
+        )
+        
 def is_model_installed(lang: str):
     models = spacy.util.get_installed_models()
     match lang:
@@ -23,25 +37,26 @@ def is_model_installed(lang: str):
         case _:
             return False
 
-
 def download_model(model_name):
     """
     Download a spaCy model.
-
-    Downloads the specified spaCy model if it is not installed.
-
-    :param model_name: str
-        The name of the spaCy model to download.
-
-    :raises RuntimeError:
-        If the model could not be downloaded.
-
     """
-    try:
-        subprocess.check_call([sys.executable, "-m", "spacy", "download", model_name])
-    except subprocess.CalledProcessError as e:
-        raise RuntimeError(f"Failed to download model {model_name}.\nError: {e}")
 
+    ensure_pip_installed()
+
+    result = subprocess.run(
+        [sys.executable, "-m", "spacy", "download", model_name],
+        capture_output=True,
+        text=True,
+    )
+
+    if result.returncode != 0:
+        output = f"{result.stdout}\n{result.stderr}"
+
+        raise RuntimeError(
+            f"Failed to download model {model_name}.\n"
+            f"Output:\n{output}"
+        )
 
 def load_lang_model(nlp_models:dict,lang: str, model_name: str):
     """
